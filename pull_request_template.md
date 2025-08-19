@@ -1,4 +1,3 @@
-Description of PR that completes issue here...
 ## What?
 - 
 
