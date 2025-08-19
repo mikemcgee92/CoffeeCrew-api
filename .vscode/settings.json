@@ -5,5 +5,9 @@
         "--django-settings-module=bangazon.settings",
         "--max-line-length=120"
     ],
+    "workbench.colorCustomizations": {
+        "activityBar.background": "#00684e",
+        "titleBar.activeBackground": "#00684e",
+        "titleBar.inactiveBackground": "#00684e",
+    }
 }
-
