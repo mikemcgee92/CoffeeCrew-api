@@ -1,0 +1,42 @@
+[
+    {
+        "model": "coffeecrewapi.ingredientamount",
+        "pk": 1,
+        "fields": {
+            "recipe": 1,
+            "size": "12oz",
+            "ingredient": 1,
+            "amount": "double shot"
+        }
+    },
+    {
+        "model": "coffeecrewapi.ingredientamount",
+        "pk": 2,
+        "fields": {
+            "recipe": 1,
+            "size": "12oz",
+            "ingredient": 2,
+            "amount": "9 oz"
+        }
+    },
+    {
+        "model": "coffeecrewapi.ingredientamount",
+        "pk": 3,
+        "fields": {
+            "recipe": 2,
+            "size": "16oz",
+            "ingredient": 1,
+            "amount": "2 shots"
+        }
+    },
+    {
+        "model": "coffeecrewapi.ingredientamount",
+        "pk": 4,
+        "fields": {
+            "recipe": 2,
+            "size": "16oz",
+            "ingredient": 2,
+            "amount": "6oz"
+        }
+    }
+]
