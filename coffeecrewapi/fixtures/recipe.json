@@ -7,7 +7,7 @@
             "category_id": 1,
             "steps": "1. Pull a ${selectedSize.ingredient.amount} of espresso.\n2. Steam ${selectedSize.ingredient.amount} of milk\n3. Pour milk over espresso",
             "notes": "Milk should be 145 degrees",
-            "image_url": "https://example.com/pour-over.jpg",
+            "image_url": "https://example.com/latte.jpg",
             "creator_id": "user123",
             "created_date": "2025-08-19T10:00:00Z"
         }
