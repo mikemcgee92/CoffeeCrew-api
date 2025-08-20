@@ -1,0 +1,16 @@
+[
+    {
+        "model": "coffeecrewapi.category",
+        "pk": 1,
+        "fields": {
+            "label": "Hot Coffee"
+        }
+    },
+    {
+        "model": "coffeecrewapi.category",
+        "pk": 2,
+        "fields": {
+            "label": "Iced Coffee"
+        }
+    }
+]

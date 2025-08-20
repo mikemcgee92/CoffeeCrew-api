@@ -7,13 +7,13 @@ from .ingredient_amount import IngredientAmount
 class Recipe(models.Model):
   """Model for recipe entities"""
   
-  label = models.CharField(max_length=50, on_delete=models.DO_NOTHING)
+  label = models.CharField(max_length=50, )
   category_id = models.ForeignKey(Category, on_delete=models.DO_NOTHING)
-  steps = models.TextField(max_length=500, on_delete=models.DO_NOTHING)
-  notes = models.TextField(max_length=500, on_delete=models.DO_NOTHING)
-  image_url = models.TextField(max_length=500, on_delete=models.DO_NOTHING)
-  creator_id = models.CharField(max_length=50, on_delete=models.DO_NOTHING)
-  created_date = models.DateTimeField(on_delete=models.DO_NOTHING)
+  steps = models.TextField(max_length=500, )
+  notes = models.TextField(max_length=500, )
+  image_url = models.TextField(max_length=500, )
+  creator_id = models.CharField(max_length=50, )
+  created_date = models.DateTimeField()
   
   @property
   def ingredient_amounts(self):

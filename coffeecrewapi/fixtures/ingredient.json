@@ -1,0 +1,16 @@
+[
+    {
+        "model": "coffeecrewapi.ingredient",
+        "pk": 1,
+        "fields": {
+            "label": "Espresso"
+        }
+    },
+    {
+        "model": "coffeecrewapi.ingredient",
+        "pk": 2,
+        "fields": {
+            "label": "Milk"
+        }
+    }
+]
