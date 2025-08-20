@@ -44,3 +44,16 @@ class Recipes(ViewSet):
       recipes, many=True, context={"request": request}
     )
     return Response(serializer.data)
+  
+  def retrieve(sef, request, pk=None):
+    """Returns a single recipe object instance following a successful GET request to /recipes/[id]"""
+    
+    try:
+      recipe = Recipe.objects.get(pk=pk)
+      
+      serializer = RecipeSerializer(recipe, context={"request": request})
+      return Response(serializer.data)
+    except Recipe.DoesNotExist as ex:
+      return Response({"message": ex.args[0]}, status=status.HTTP_404_NOT_FOUND)
+    except Exception as ex:
+      return Response({"message": ex.args[0]}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
