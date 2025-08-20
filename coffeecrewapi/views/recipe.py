@@ -49,7 +49,7 @@ class Recipes(ViewSet):
     )
     return Response(serializer.data)
   
-  def retrieve(sef, request, pk=None):
+  def retrieve(self, request, pk=None):
     """Returns a single recipe object instance following a successful GET request to /recipes/[id]"""
     
     try:

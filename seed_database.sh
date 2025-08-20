@@ -2,9 +2,9 @@
 
 rm db.sqlite3
 rm -rf ./coffeecrewapi/migrations
-python3 manage.py migrate
-python3 manage.py makemigrations coffeecrewapi
-python3 manage.py migrate coffeecrewapi
-python3 manage.py loaddata users
-python3 manage.py loaddata tokens
-
+python manage.py makemigrations coffeecrewapi
+python manage.py migrate
+python manage.py loaddata category
+python manage.py loaddata recipe
+python manage.py loaddata ingredient
+python manage.py loaddata ingredient_amount
