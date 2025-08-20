@@ -83,3 +83,21 @@ class Recipes(ViewSet):
       new_recipe, context={"request": request}
     )
     return Response(serializer.data, status=status.HTTP_201_CREATED)
+  
+  def update(self, request, pk=None):
+    """Update a recipe object
+    
+    Returns status code 204 - no content on success"""
+    
+    recipe = Recipe.objects.get(pk=pk)
+    recipe.label = request.data["label"]
+    recipe.category_id = Category.objects.get(id=request.data["category_id"])
+    recipe.steps = request.data["steps"]
+    recipe.notes = request.data["notes"]
+    recipe.image_url = request.data["image_url"]
+    recipe.creator_id = request.data["creator_id"]
+    recipe.created_date = datetime.now()
+    
+    recipe.save()
+    
+    return Response({}, status=status.HTTP_204_NO_CONTENT)
