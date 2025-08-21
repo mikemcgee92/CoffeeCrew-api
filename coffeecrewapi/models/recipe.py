@@ -19,4 +19,4 @@ class Recipe(models.Model):
   def ingredient_amounts(self):
     """All ingredients with amounts by size"""
     ingredient_amounts = IngredientAmount.objects.filter(recipe=self)
-    return list(ingredient_amounts.values('size', 'ingredient', 'amount'))
+    return ingredient_amounts
