@@ -208,3 +208,4 @@ db.sqlite3
 
 # Miscellaneous
 examples.json
+secret_key.py

@@ -13,3 +13,6 @@ class IngredientAmount(models.Model):
   size = models.CharField(max_length=50)
   ingredient = models.ForeignKey(Ingredient, on_delete=models.DO_NOTHING)
   amount = models.CharField(max_length=50)
+  
+  class Meta:
+    unique_together = 'recipe', 'size', 'ingredient', 'amount'

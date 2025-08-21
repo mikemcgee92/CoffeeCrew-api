@@ -1,6 +1,7 @@
 from datetime import datetime
-from coffeecrewapi.models import Recipe, Category
+from coffeecrewapi.models import Recipe, Category, Ingredient, IngredientAmount
 from rest_framework import serializers, status
+from rest_framework.decorators import action
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.viewsets import ViewSet
@@ -15,6 +16,7 @@ class RecipeSerializer(serializers.ModelSerializer):
       "id",
       "label",
       "category_id",
+      "ingredient_amounts",
       "steps",
       "notes",
       "image_url",
@@ -116,3 +118,52 @@ class Recipes(ViewSet):
       return Response({"message": ex.args[0]}, status=status.HTTP_404_NOT_FOUND)
     except Exception as ex:
       return Response({"message": ex.args[0]}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+  
+  @action(methods=["post", "delete"], detail=True, url_path="ingredient")
+  def ingredients(self, request, pk=None):
+    """Add an ingredient to a recipe"""
+    
+    if request.method == "POST":
+      ingredient_amount = IngredientAmount()
+      
+      ingredient_amount.recipe = Recipe.objects.get(pk=pk)
+      ingredient_amount.size = request.data["size"]
+      ingredient_amount.ingredient = Ingredient.objects.get(id=request.data["ingredient"])
+      ingredient_amount.amount = request.data["amount"]
+      
+      ingredient_amount.save()
+      
+      return Response({}, status=status.HTTP_204_NO_CONTENT)
+    
+    if request.method == "DELETE":
+      print("delete block hit")
+      ingredient = Ingredient.objects.get(id=request.data["ingredient"])
+      recipe = Recipe.objects.get(pk=pk)
+      size = request.data["size"]
+      amount = request.data["amount"]
+      
+      ingredient_amount = IngredientAmount.objects.get(recipe=recipe, size=size, ingredient=ingredient, amount=amount)
+      ingredient_amount.delete()
+      
+      return Response({}, status=status.HTTP_204_NO_CONTENT)
+    
+    return Response({}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
+  
+  # @action(methods=["delete"], detail=True, url_path="ingredient")
+  # def remove_ingredient(self, request, pk=None):
+  #   """Remove an ingredient from a recipe"""
+    
+  #   if request.method == "DELETE":
+  #     print("delete block hit")
+  #     ingredient = Ingredient.objects.get(id=request.data["ingredient"])
+  #     recipe = Recipe.objects.get(pk=pk)
+  #     size = request.data["size"]
+  #     amount = request.data["amount"]
+      
+  #     ingredient_amount = IngredientAmount.objects.get(recipe=recipe, size=size, ingredient=ingredient, amount=amount)
+  #     ingredient_amount.delete()
+      
+  #     return Response({}, status=status.HTTP_204_NO_CONTENT)
+    
+  #   return Response({}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
+    
