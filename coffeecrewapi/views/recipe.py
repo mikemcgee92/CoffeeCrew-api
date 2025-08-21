@@ -1,5 +1,6 @@
 from datetime import datetime
 from coffeecrewapi.models import Recipe, Category, Ingredient, IngredientAmount
+from .ingredient_amount import IngredientAmountSerializer
 from rest_framework import serializers, status
 from rest_framework.decorators import action
 from rest_framework.permissions import AllowAny
@@ -9,7 +10,8 @@ from rest_framework.viewsets import ViewSet
 
 class RecipeSerializer(serializers.ModelSerializer):
   """JSON serializer for recipes"""
-  
+    
+  ingredient_amounts = IngredientAmountSerializer(many=True, read_only=True)
   class Meta:
     model = Recipe
     fields = (
@@ -23,8 +25,7 @@ class RecipeSerializer(serializers.ModelSerializer):
       "creator_id",
       "created_date",
     )
-    depth = 1
-    # TODO: Make sure depth is accurate when testing
+    depth = 2
 
 class Recipes(ViewSet):
   """Request handlers for Recipes in the CoffeeCrew app"""
