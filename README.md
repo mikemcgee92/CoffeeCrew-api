@@ -1,6 +1,6 @@
 # CoffeeCrew API
 
-A Django REST Framework API for managing coffee recipes and their ingredients. This API serves as the backend for the CoffeeCrew application, allowing users to create, manage, and share coffee recipes.
+A Django REST Framework API for managing coffee recipes and their ingredients. This API serves as the backend for the CoffeeCrew application, allowing users to create and manage coffee recipes.
 
 ## Features
 
@@ -8,7 +8,6 @@ A Django REST Framework API for managing coffee recipes and their ingredients. T
 - Category management for recipe organization
 - Ingredient tracking with amounts and measurements
 - Cross-Origin Resource Sharing (CORS) enabled for frontend integration
-- Token-based authentication
 
 ## Tech Stack
 
