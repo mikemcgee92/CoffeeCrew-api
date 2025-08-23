@@ -9,9 +9,9 @@ class IngredientAmount(models.Model):
     Joins Recipe and Ingredient entities
   """
   
-  recipe = models.ForeignKey("Recipe", on_delete=models.DO_NOTHING)
+  recipe = models.ForeignKey("Recipe", on_delete=models.CASCADE)
   size = models.CharField(max_length=50)
-  ingredient = models.ForeignKey(Ingredient, on_delete=models.DO_NOTHING)
+  ingredient = models.ForeignKey(Ingredient, on_delete=models.CASCADE)
   amount = models.CharField(max_length=50)
   
   class Meta:

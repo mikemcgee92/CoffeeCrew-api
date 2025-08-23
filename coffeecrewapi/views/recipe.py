@@ -137,7 +137,6 @@ class Recipes(ViewSet):
       return Response({}, status=status.HTTP_204_NO_CONTENT)
     
     if request.method == "DELETE":
-      print("delete block hit")
       ingredient = Ingredient.objects.get(id=request.data["ingredient"])
       recipe = Recipe.objects.get(pk=pk)
       size = request.data["size"]
