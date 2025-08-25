@@ -148,22 +148,4 @@ class Recipes(ViewSet):
       return Response({}, status=status.HTTP_204_NO_CONTENT)
     
     return Response({}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
-  
-  # @action(methods=["delete"], detail=True, url_path="ingredient")
-  # def remove_ingredient(self, request, pk=None):
-  #   """Remove an ingredient from a recipe"""
-    
-  #   if request.method == "DELETE":
-  #     print("delete block hit")
-  #     ingredient = Ingredient.objects.get(id=request.data["ingredient"])
-  #     recipe = Recipe.objects.get(pk=pk)
-  #     size = request.data["size"]
-  #     amount = request.data["amount"]
-      
-  #     ingredient_amount = IngredientAmount.objects.get(recipe=recipe, size=size, ingredient=ingredient, amount=amount)
-  #     ingredient_amount.delete()
-      
-  #     return Response({}, status=status.HTTP_204_NO_CONTENT)
-    
-  #   return Response({}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
     
