@@ -122,7 +122,7 @@ class Recipes(ViewSet):
   
   @action(methods=["post", "delete"], detail=True, url_path="ingredient")
   def ingredients(self, request, pk=None):
-    """Add an ingredient to a recipe"""
+    """Add or remove an ingredient to/from a recipe"""
     
     if request.method == "POST":
       ingredient_amount = IngredientAmount()
@@ -144,6 +144,19 @@ class Recipes(ViewSet):
       
       ingredient_amount = IngredientAmount.objects.get(recipe=recipe, size=size, ingredient=ingredient, amount=amount)
       ingredient_amount.delete()
+      
+      return Response({}, status=status.HTTP_204_NO_CONTENT)
+    
+    return Response({}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
+  
+  @action(methods=["delete"], detail=True, url_path="remove-ingredients")
+  def remove_ingredients(self, request, pk=None):
+    """Remove all ingredients from a recipe"""
+    
+    if request.method == "DELETE":
+      recipe = Recipe.objects.get(pk=pk)
+      ingredient_amounts = IngredientAmount.objects.filter(recipe=recipe)
+      ingredient_amounts.delete()
       
       return Response({}, status=status.HTTP_204_NO_CONTENT)
     
