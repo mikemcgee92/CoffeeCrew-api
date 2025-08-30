@@ -13,6 +13,7 @@ class CategorySerializer(serializers.ModelSerializer):
     fields = (
       "id",
       "label",
+      "creator_id",
     )
 
 class Categories(ViewSet):
@@ -48,6 +49,7 @@ class Categories(ViewSet):
     
     new_category = Category()
     new_category.label = request.data["label"]
+    new_category.creator_id = request.headers.get('Authorization')
     
     new_category.save()
     
@@ -61,6 +63,7 @@ class Categories(ViewSet):
     
     category = Category.objects.get(pk=pk)
     category.label = request.data["label"]
+    category.creator_id = request.headers.get('Authorization')
     
     category.save()
     
@@ -71,6 +74,8 @@ class Categories(ViewSet):
     
     try:
       category = Category.objects.get(pk=pk)
+      if request.headers.get('Authorization') != category.creator_id:
+        return Response({}, status=status.HTTP_401_UNAUTHORIZED)
       category.delete()
       
       return Response({}, status=status.HTTP_204_NO_CONTENT)

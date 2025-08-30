@@ -3,14 +3,16 @@
         "model": "coffeecrewapi.category",
         "pk": 1,
         "fields": {
-            "label": "Hot Coffee"
+            "label": "Hot Coffee",
+            "creator_id": "PMJkakg871T9n1BnUGVSHILfc4o2"
         }
     },
     {
         "model": "coffeecrewapi.category",
         "pk": 2,
         "fields": {
-            "label": "Iced Coffee"
+            "label": "Iced Coffee",
+            "creator_id": "PMJkakg871T9n1BnUGVSHILfc4o2"
         }
     }
 ]

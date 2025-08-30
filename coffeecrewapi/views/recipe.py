@@ -77,7 +77,7 @@ class Recipes(ViewSet):
     new_recipe.steps = request.data["steps"]
     new_recipe.notes = request.data["notes"]
     new_recipe.image_url = request.data["image_url"]
-    new_recipe.creator_id = request.data["creator_id"]
+    new_recipe.creator_id = request.headers.get('Authorization')
     new_recipe.created_date = datetime.now()
     
     new_recipe.save()
@@ -98,7 +98,7 @@ class Recipes(ViewSet):
     recipe.steps = request.data["steps"]
     recipe.notes = request.data["notes"]
     recipe.image_url = request.data["image_url"]
-    recipe.creator_id = request.data["creator_id"]
+    recipe.creator_id = request.headers.get('Authorization')
     recipe.created_date = datetime.now()
     
     recipe.save()
@@ -112,6 +112,8 @@ class Recipes(ViewSet):
     
     try:
       recipe = Recipe.objects.get(pk=pk)
+      if request.headers.get('Authorization') != recipe.creator_id:
+        return Response({}, status=status.HTTP_401_UNAUTHORIZED)
       recipe.delete()
       
       return Response({}, status=status.HTTP_204_NO_CONTENT)
@@ -128,6 +130,10 @@ class Recipes(ViewSet):
       ingredient_amount = IngredientAmount()
       
       ingredient_amount.recipe = Recipe.objects.get(pk=pk)
+      
+      if request.headers.get('Authorization') != ingredient_amount.recipe.creator_id:
+        return Response({}, status=status.HTTP_401_UNAUTHORIZED)
+      
       ingredient_amount.size = request.data["size"]
       ingredient_amount.ingredient = Ingredient.objects.get(id=request.data["ingredient"])
       ingredient_amount.amount = request.data["amount"]
@@ -139,6 +145,10 @@ class Recipes(ViewSet):
     if request.method == "DELETE":
       ingredient = Ingredient.objects.get(id=request.data["ingredient"])
       recipe = Recipe.objects.get(pk=pk)
+      
+      if request.headers.get('Authorization') != recipe.creator_id:
+        return Response({}, status=status.HTTP_401_UNAUTHORIZED)
+      
       size = request.data["size"]
       amount = request.data["amount"]
       
@@ -155,6 +165,9 @@ class Recipes(ViewSet):
     
     if request.method == "DELETE":
       recipe = Recipe.objects.get(pk=pk)
+      if request.headers.get('Authorization') != recipe.creator_id:
+        return Response({}, status=status.HTTP_401_UNAUTHORIZED)
+      
       ingredient_amounts = IngredientAmount.objects.filter(recipe=recipe)
       ingredient_amounts.delete()
       

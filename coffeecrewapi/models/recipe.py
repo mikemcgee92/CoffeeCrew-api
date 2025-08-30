@@ -8,7 +8,7 @@ class Recipe(models.Model):
   """Model for recipe entities"""
   
   label = models.CharField(max_length=50, )
-  category_id = models.ForeignKey(Category, on_delete=models.DO_NOTHING)
+  category_id = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True)
   steps = models.TextField(max_length=500, )
   notes = models.TextField(max_length=500, )
   image_url = models.TextField(max_length=500, )
