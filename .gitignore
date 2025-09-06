@@ -209,3 +209,5 @@ db.sqlite3
 # Miscellaneous
 examples.json
 secret_key.py
+coffeecrew/settings.py
+testing.json
