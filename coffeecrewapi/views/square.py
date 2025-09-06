@@ -18,7 +18,9 @@ def get_orders(request):
         "L79CTPXJ8AYAR"
       ]
     )
-    print(result)
-    return JsonResponse(result)
+    orders = [order.model_dump() for order in result.orders] if result.orders else []
+    print(orders)
+    return JsonResponse(orders, safe=False)
   except ApiError as e:
     print(e.status_code)
+    return JsonResponse({'error': str(e)}, status=500)
