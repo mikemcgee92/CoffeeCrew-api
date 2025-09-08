@@ -29,11 +29,11 @@ class CompletedOrders(ViewSet):
         )
         return Response(serializer.data)
     
-    def retrieve(self, request, pk=None):
+    def retrieve(self, request, order_id=None):
         """Returns a single completed order object"""
         
         try:
-            completed_order = CompletedOrder.objects.get(pk=pk)
+            completed_order = CompletedOrder.objects.get(order_id=order_id)
             
             serializer = CompletedOrderSerializer(completed_order, context={"request": request})
             return Response(serializer.data)
@@ -42,4 +42,26 @@ class CompletedOrders(ViewSet):
         except Exception as ex:
             return Response({"message": ex.args[0]}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         
+    def create(self, request):
+        """Create a completed order object following successful POST request to /completeorder"""
+        
+        new_completed_order = CompletedOrder()
+        new_completed_order.order_id = request.data["order_id"]
+        new_completed_order.save()
+        
+        serializer = CompletedOrder(
+            new_completed_order, context={"request": request}
+        )
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
     
+    def destroy(self, request, order_id=None):
+        """Delete a completed order"""
+        
+        try:
+            completed_order = CompletedOrder.objects.get(order_id=order_id)
+            completed_order.delete()
+            return Response({}, status=status.HTTP_204_NO_CONTENT)
+        except CompletedOrder.DoesNotExist as ex:
+            return Response({"message": ex.args[0]}, status=status.HTTP_404_NOT_FOUND)
+        except Exception as ex:
+            return Response({"message": ex.args[0]}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
