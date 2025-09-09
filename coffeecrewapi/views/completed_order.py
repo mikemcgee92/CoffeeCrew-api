@@ -11,7 +11,7 @@ class CompletedOrderSerializer(serializers.ModelSerializer):
     class Meta:
         model = CompletedOrder
         fields = (
-            "completed_order",
+            "order_id",
         )
 
 class CompletedOrders(ViewSet):
@@ -47,9 +47,10 @@ class CompletedOrders(ViewSet):
         
         new_completed_order = CompletedOrder()
         new_completed_order.order_id = request.data["order_id"]
+        
         new_completed_order.save()
         
-        serializer = CompletedOrder(
+        serializer = CompletedOrderSerializer(
             new_completed_order, context={"request": request}
         )
         return Response(serializer.data, status=status.HTTP_201_CREATED)

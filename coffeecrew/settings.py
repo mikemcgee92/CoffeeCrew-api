@@ -1,6 +1,6 @@
 
 from pathlib import Path
-from secret_key import coffeecrewapi_secret_key
+from secret_key import coffeecrewapi_secret_key, square_secret_key
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -135,4 +135,4 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-SQUARE_ACCESS_TOKEN = 'EAAAl8aPbGNPGHGixEIj3MMdYnsiFFbP7b9uTUg0Ne7IENz-rzvbHdP_Bxld2QoV'
+SQUARE_ACCESS_TOKEN = square_secret_key
