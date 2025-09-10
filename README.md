@@ -16,6 +16,7 @@ A Django REST Framework API for managing coffee recipes and their ingredients. T
 - Django REST Framework
 - SQLite3 (Development Database)
 - django-cors-headers
+- Square
 
 ## Getting Started
 
@@ -78,9 +79,14 @@ The API will be available at `http://localhost:8000`.
 
 - `GET /ingredients` - List all ingredients
 - `GET /ingredients/{id}` - Retrieve a specific ingredient
-- `POST /ingredients` - Create a new ingredient
-- `PUT /ingredients/{id}` - Update an ingredient
-- `DELETE /ingredients/{id}` - Delete an ingredient
+
+### Square
+- `GET /square/orders` - List orders from Square API
+- `GET /completed-orders` - List order IDs marked as completed
+- `POST /completed-orders` - Post an ID of an order marked completed
+- `DELETE /completed-orders/{order_id}` - Delete a completed order ID
+
+
 
 ## Data Models
 
