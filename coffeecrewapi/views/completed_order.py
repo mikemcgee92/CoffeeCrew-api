@@ -55,11 +55,11 @@ class CompletedOrders(ViewSet):
         )
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     
-    def destroy(self, request, order_id=None):
+    def destroy(self, request, pk=None):
         """Delete a completed order"""
         
         try:
-            completed_order = CompletedOrder.objects.get(order_id=order_id)
+            completed_order = CompletedOrder.objects.filter(order_id=pk)
             completed_order.delete()
             return Response({}, status=status.HTTP_204_NO_CONTENT)
         except CompletedOrder.DoesNotExist as ex:
