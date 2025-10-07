@@ -7,15 +7,7 @@
       "config": {
         "maxLambdaSize": "15mb",
         "runtime": "python3.9",
-        "buildCommand": "pip install -r requirements.txt"
-      }
-    },
-    {
-      "src": "build_files.sh",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "staticfiles",
-        "buildCommand": "./build_files.sh"
+        "buildCommand": "chmod +x vercel_build.sh && ./vercel_build.sh"
       }
     }
   ],
