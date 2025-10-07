@@ -1,7 +1,6 @@
 Django==4.2.23
 django-cors-headers==4.7.0
 djangorestframework==3.16.1
-dj-database-url==3.0.1
-psycopg2-binary==2.9.10
-squareup==43.0.2.20250820
 whitenoise==6.11.0
+squareup==43.0.2.20250820
+python-dotenv==1.0.0
