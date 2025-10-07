@@ -1,6 +1,8 @@
 
 from pathlib import Path
-from secret_key import coffeecrewapi_secret_key, square_secret_key
+from secret_key import coffeecrewapi_secret_key, square_secret_key, DATABASE_URL
+
+import dj_database_url
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -32,6 +34,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'corsheaders',
     'coffeecrewapi',
+    'whitenoise.runserver_nostatic'
 ]
 
 REST_FRAMEWORK = {
@@ -60,6 +63,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'coffeecrew.urls'
@@ -87,10 +91,11 @@ WSGI_APPLICATION = 'coffeecrew.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.parse(
+        DATABASE_URL,
+        conn_max_age=600,
+        conn_health_checks=True,
+    )
 }
 
 
