@@ -2,7 +2,7 @@
   "version": 2,
   "builds": [
     {
-      "src": "coffeecrew/wsgi.py",
+      "src": "coffeecrewproject/wsgi.py",
       "use": "@vercel/python",
       "config": {"maxLambdaSize": "15mb", "runtime": "python3.9"}
     },
@@ -17,7 +17,7 @@
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "coffeecrew/wsgi.py"
+      "dest": "coffeecrewproject/wsgi.py"
     },
     {
       "src": "/static/(.*)",
