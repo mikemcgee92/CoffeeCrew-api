@@ -140,3 +140,8 @@ CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:3000",
     "https://coffee-crew.vercel.app"
 ]
+
+# Square API settings
+SQUARE_ACCESS_TOKEN = os.environ.get('SQUARE_ACCESS_TOKEN')
+if not SQUARE_ACCESS_TOKEN:
+    raise ValueError("SQUARE_ACCESS_TOKEN environment variable is not set")
