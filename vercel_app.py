@@ -10,7 +10,7 @@ app_path = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(app_path)
 
 # Use production settings for Vercel
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'coffeecrewproject.production_settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'coffeecrew.production_settings')
 
 try:
     # Initialize Django WSGI application
