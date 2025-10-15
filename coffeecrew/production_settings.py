@@ -64,7 +64,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'coffeecrewproject.urls'
+ROOT_URLCONF = 'coffeecrew.urls'
 
 TEMPLATES = [
     {
@@ -82,7 +82,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'coffeecrewproject.wsgi.application'
+WSGI_APPLICATION = 'coffeecrew.wsgi.application'
 
 # Database
 # Using SQLite for Vercel deployment

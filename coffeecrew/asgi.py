@@ -1,5 +1,5 @@
 """
-ASGI config for coffeecrewproject project.
+ASGI config for coffeecrew project.
 
 It exposes the ASGI callable as a module-level variable named ``application``.
 

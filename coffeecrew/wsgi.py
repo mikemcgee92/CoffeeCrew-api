@@ -1,5 +1,5 @@
 """
-WSGI config for coffeecrewproject project.
+WSGI config for coffeecrew project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
