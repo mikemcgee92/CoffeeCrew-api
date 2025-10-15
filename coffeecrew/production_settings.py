@@ -22,19 +22,31 @@ DATABASE_URL = os.environ.get('DATABASE_URL')
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '{levelname} {asctime} {module} {process:d} {thread:d} {message}',
+            'style': '{',
+        },
+    },
     'handlers': {
         'console': {
             'class': 'logging.StreamHandler',
+            'formatter': 'verbose',
         },
     },
     'root': {
         'handlers': ['console'],
-        'level': 'WARNING',
+        'level': 'INFO',
     },
     'loggers': {
         'django': {
             'handlers': ['console'],
-            'level': os.environ.get('DJANGO_LOG_LEVEL', 'INFO'),
+            'level': 'INFO',
+            'propagate': False,
+        },
+        'django.db.backends': {
+            'handlers': ['console'],
+            'level': 'INFO',
             'propagate': False,
         },
     },
@@ -90,13 +102,29 @@ TEMPLATES = [
 WSGI_APPLICATION = 'coffeecrew.wsgi.application'
 
 # Database
-# Using SQLite for Vercel deployment
-DATABASES = {
-    'default': dj_database_url.parse(
-        DATABASE_URL,
-        conn_max_age=600,
-        conn_health_checks=True,
+if not DATABASE_URL:
+    raise ValueError(
+        "No DATABASE_URL environment variable set. "
+        "Please set this to your PostgreSQL connection string."
     )
+
+# Log the database configuration (without sensitive details)
+db_config = dj_database_url.parse(DATABASE_URL)
+print(f"Database Engine: {db_config.get('ENGINE', 'Not set')}")
+print(f"Database Name: {db_config.get('NAME', 'Not set')}")
+print(f"Database Host: {db_config.get('HOST', 'Not set')}")
+print(f"Database Port: {db_config.get('PORT', 'Not set')}")
+
+DATABASES = {
+    'default': {
+        **db_config,
+        'CONN_MAX_AGE': 0,  # Close connections after each request
+        'CONN_HEALTH_CHECKS': True,
+        'OPTIONS': {
+            'sslmode': 'require',
+            'connect_timeout': 30,
+        },
+    }
 }
 
 # Password validation
