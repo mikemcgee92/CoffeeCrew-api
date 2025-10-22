@@ -9,10 +9,6 @@
         "runtime": "python3.9",
         "buildCommand": "chmod +x vercel_build.sh && ./vercel_build.sh"
       }
-    },
-    {
-      "src": "staticfiles/**",
-      "use": "@vercel/static"
     }
   ],
   "headers": [
@@ -27,11 +23,6 @@
     }
   ],
   "rewrites": [
-    { "source": "/static/:path*", "destination": "/staticfiles/:path*" },
-    { "source": "/:path*/", "destination": "/:path*" },
-    { "source": "/admin/:path*", "destination": "/vercel_app.py" },
-    { "source": "/api/:path*", "destination": "/vercel_app.py" },
-    { "source": "/:path*", "destination": "/vercel_app.py" }
-  ],
-  "trailingSlash": false
+    { "source": "/(.*)", "destination": "/vercel_app.py" }
+  ]
 }
