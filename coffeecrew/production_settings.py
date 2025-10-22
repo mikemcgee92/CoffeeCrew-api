@@ -169,43 +169,31 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.AllowAny',
     ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [],  # Temporarily disable authentication for debugging
+    'UNAUTHENTICATED_USER': None,
 }
 
 # CORS settings
-CORS_ALLOW_ALL_ORIGINS = True  # Temporarily enable all origins for debugging
+CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",
-    "http://127.0.0.1:3000",
-    "https://coffee-crew.vercel.app"
-]
-CORS_ALLOWED_ORIGIN_REGEXES = [
-    r"^https://.*\.vercel\.app$"
-]
-CORS_ALLOW_METHODS = [
-    'DELETE',
-    'GET',
-    'OPTIONS',
-    'PATCH',
-    'POST',
-    'PUT',
-]
-CORS_ALLOW_HEADERS = [
-    'accept',
-    'accept-encoding',
-    'authorization',
-    'content-type',
-    'dnt',
-    'origin',
-    'user-agent',
-    'x-csrftoken',
-    'x-requested-with',
-]
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_METHODS = ['*']
+CORS_ALLOW_HEADERS = ['*']
 CORS_EXPOSE_HEADERS = ['*']
-CORS_PREFLIGHT_MAX_AGE = 86400  # 24 hours
 
-# Ensure the CORS middleware is first
-MIDDLEWARE.insert(0, 'corsheaders.middleware.CorsMiddleware')
+# Custom middleware configuration
+MIDDLEWARE = [
+    'coffeecrewapi.middleware.OptionsMiddleware',  # Handle OPTIONS requests
+    'corsheaders.middleware.CorsMiddleware',       # CORS handling
+    'django.middleware.common.CommonMiddleware',
+    'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+]
 
 # Square API settings
 SQUARE_ACCESS_TOKEN = os.environ.get('SQUARE_ACCESS_TOKEN')
