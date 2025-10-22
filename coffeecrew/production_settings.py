@@ -174,12 +174,24 @@ REST_FRAMEWORK = {
 }
 
 # CORS settings
-CORS_ALLOW_ALL_ORIGINS = True
-CORS_ALLOW_CREDENTIALS = True
 CORS_ORIGIN_ALLOW_ALL = True
-CORS_ALLOW_METHODS = ['*']
-CORS_ALLOW_HEADERS = ['*']
-CORS_EXPOSE_HEADERS = ['*']
+CORS_ALLOW_CREDENTIALS = False  # Changed to False since we're not using credentials
+CORS_ALLOW_METHODS = [
+    'GET',
+    'POST',
+    'PUT',
+    'PATCH',
+    'DELETE',
+    'OPTIONS'
+]
+CORS_ALLOW_HEADERS = [
+    'accept',
+    'accept-encoding',
+    'authorization',
+    'content-type',
+    'origin',
+    'user-agent',
+]
 
 # Custom middleware configuration
 MIDDLEWARE = [
