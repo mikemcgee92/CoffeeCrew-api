@@ -173,34 +173,12 @@ REST_FRAMEWORK = {
     'UNAUTHENTICATED_USER': None,
 }
 
-# CORS settings
-CORS_ORIGIN_ALLOW_ALL = True
-CORS_ALLOW_CREDENTIALS = False  # Changed to False since we're not using credentials
-CORS_ALLOW_METHODS = [
-    'GET',
-    'POST',
-    'PUT',
-    'PATCH',
-    'DELETE',
-    'OPTIONS'
-]
-CORS_ALLOW_HEADERS = [
-    'accept',
-    'accept-encoding',
-    'authorization',
-    'content-type',
-    'origin',
-    'user-agent',
-]
-
 # Custom middleware configuration
 MIDDLEWARE = [
-    'coffeecrewapi.middleware.OptionsMiddleware',  # Handle OPTIONS requests
-    'corsheaders.middleware.CorsMiddleware',       # CORS handling
-    'django.middleware.common.CommonMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
