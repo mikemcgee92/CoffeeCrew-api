@@ -6,7 +6,6 @@ from rest_framework.decorators import action
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.viewsets import ViewSet
-from coffeecrewapi.middleware import cors_allow_all
 
 
 class RecipeSerializer(serializers.ModelSerializer):
@@ -33,7 +32,7 @@ class Recipes(ViewSet):
   
   permission_classes = (AllowAny,)
   
-  @cors_allow_all
+  
   def list(self, request):
     """Returns a list of all recipe objects following a successful GET request to /recipes"""
     
@@ -54,7 +53,7 @@ class Recipes(ViewSet):
     )
     return Response(serializer.data)
   
-  @cors_allow_all
+  
   def retrieve(self, request, pk=None):
     """Returns a single recipe object instance following a successful GET request to /recipes/[id]"""
     
@@ -68,7 +67,7 @@ class Recipes(ViewSet):
     except Exception as ex:
       return Response({"message": ex.args[0]}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
   
-  @cors_allow_all
+  
   def create(self, request):
     """Create a recipe object
     
@@ -91,7 +90,7 @@ class Recipes(ViewSet):
     )
     return Response(serializer.data, status=status.HTTP_201_CREATED)
   
-  @cors_allow_all
+  
   def update(self, request, pk=None):
     """Update a recipe object
     
@@ -110,7 +109,7 @@ class Recipes(ViewSet):
     
     return Response({}, status=status.HTTP_204_NO_CONTENT)
   
-  @cors_allow_all
+  
   def destroy(self, request, pk=None):
     """Delete a recipe object
     
@@ -128,7 +127,7 @@ class Recipes(ViewSet):
     except Exception as ex:
       return Response({"message": ex.args[0]}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
   
-  @cors_allow_all
+  
   @action(methods=["post", "delete"], detail=True, url_path="ingredient")
   def ingredients(self, request, pk=None):
     """Add or remove an ingredient to/from a recipe"""
@@ -166,7 +165,7 @@ class Recipes(ViewSet):
     
     return Response({}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
   
-  @cors_allow_all
+  
   @action(methods=["delete"], detail=True, url_path="remove-ingredients")
   def remove_ingredients(self, request, pk=None):
     """Remove all ingredients from a recipe"""

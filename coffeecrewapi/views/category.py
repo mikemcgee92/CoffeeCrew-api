@@ -3,7 +3,6 @@ from rest_framework import serializers, status
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.viewsets import ViewSet
-from coffeecrewapi.middleware import cors_allow_all
 
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -22,7 +21,7 @@ class Categories(ViewSet):
   
   permission_classes = (AllowAny,)
   
-  @cors_allow_all
+ 
   def list(self, request):
     """Returns a list of all category objects following a successful GET request to /categories"""
     
@@ -33,7 +32,7 @@ class Categories(ViewSet):
     )
     return Response(serializer.data)
   
-  @cors_allow_all
+ 
   def retrieve(self, request, pk=None):
     """Returns a single category object instance following a successful GET request to /categories/[id]"""
     
@@ -47,7 +46,7 @@ class Categories(ViewSet):
     except Exception as ex:
       return Response({"message": ex.args[0]}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
   
-  @cors_allow_all
+ 
   def create(self, request):
     """Create a category object following a successful POST request to /categories, with valid JSON in the request body matching the category model"""
     
@@ -62,7 +61,7 @@ class Categories(ViewSet):
     )
     return Response(serializer.data, status=status.HTTP_201_CREATED)
   
-  @cors_allow_all
+ 
   def update(self, request, pk=None):
     """Update a category object matching the requested id following a successful PUT request to categories/[id] with valid JSON in the request body matching the category model"""
     
@@ -74,7 +73,7 @@ class Categories(ViewSet):
     
     return Response({}, status=status.HTTP_204_NO_CONTENT)
   
-  @cors_allow_all
+ 
   def destroy(self, request, pk=None):
     """Delete a category object mathing the requested id following a successful DELETE request to categories/[id]"""
     
