@@ -26,29 +26,12 @@
       ]
     }
   ],
-  "routes": [
-    {
-      "src": "/static/(.*)",
-      "dest": "/staticfiles/$1"
-    },
-    {
-      "handle": "filesystem"
-    },
-    {
-      "src": "/(.*)/",
-      "dest": "/$1"
-    },
-    {
-      "src": "/admin/(.*)",
-      "dest": "/vercel_app.py"
-    },
-    {
-      "src": "/api/(.*)",
-      "dest": "/vercel_app.py"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/vercel_app.py"
-    }
-  ]
+  "rewrites": [
+    { "source": "/static/:path*", "destination": "/staticfiles/:path*" },
+    { "source": "/:path*/", "destination": "/:path*" },
+    { "source": "/admin/:path*", "destination": "/vercel_app.py" },
+    { "source": "/api/:path*", "destination": "/vercel_app.py" },
+    { "source": "/:path*", "destination": "/vercel_app.py" }
+  ],
+  "trailingSlash": false
 }
