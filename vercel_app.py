@@ -34,8 +34,44 @@ try:
     
     # Get WSGI application
     from django.core.wsgi import get_wsgi_application
-    app = get_wsgi_application()
-    print("WSGI application initialized successfully")
+    
+    class CORSMiddleware:
+        def __init__(self, app):
+            self.app = app
+
+        def __call__(self, environ, start_response):
+            def custom_start_response(status, headers, exc_info=None):
+                cors_headers = [
+                    ('Access-Control-Allow-Origin', '*'),
+                    ('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS'),
+                    ('Access-Control-Allow-Headers', '*'),
+                    ('Access-Control-Allow-Credentials', 'true'),
+                    ('Access-Control-Max-Age', '86400'),
+                ]
+                
+                # Add CORS headers to the response
+                headers = headers + cors_headers
+                return start_response(status, headers, exc_info)
+
+            if environ['REQUEST_METHOD'] == 'OPTIONS':
+                # Handle CORS preflight requests
+                status = '200 OK'
+                headers = [
+                    ('Content-Type', 'text/plain'),
+                    ('Access-Control-Allow-Origin', '*'),
+                    ('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS'),
+                    ('Access-Control-Allow-Headers', '*'),
+                    ('Access-Control-Allow-Credentials', 'true'),
+                    ('Access-Control-Max-Age', '86400'),
+                ]
+                start_response(status, headers)
+                return [b'']  # Empty response for OPTIONS request
+
+            return self.app(environ, custom_start_response)
+
+    # Get the WSGI application and wrap it with CORS middleware
+    app = CORSMiddleware(get_wsgi_application())
+    print("WSGI application initialized successfully with CORS middleware")
     
 except Exception as ex:
     print(f"Error during startup: {str(ex)}")
