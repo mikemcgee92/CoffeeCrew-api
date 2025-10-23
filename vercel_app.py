@@ -34,7 +34,6 @@ try:
     
     # Get WSGI application
     from django.core.wsgi import get_wsgi_application
-    
     class CORSMiddleware:
         def __init__(self, app):
             self.app = app
