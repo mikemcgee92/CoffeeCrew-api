@@ -32,6 +32,7 @@ class Recipes(ViewSet):
   
   permission_classes = (AllowAny,)
   
+  
   def list(self, request):
     """Returns a list of all recipe objects following a successful GET request to /recipes"""
     
@@ -52,6 +53,7 @@ class Recipes(ViewSet):
     )
     return Response(serializer.data)
   
+  
   def retrieve(self, request, pk=None):
     """Returns a single recipe object instance following a successful GET request to /recipes/[id]"""
     
@@ -64,6 +66,7 @@ class Recipes(ViewSet):
       return Response({"message": ex.args[0]}, status=status.HTTP_404_NOT_FOUND)
     except Exception as ex:
       return Response({"message": ex.args[0]}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+  
   
   def create(self, request):
     """Create a recipe object
@@ -87,6 +90,7 @@ class Recipes(ViewSet):
     )
     return Response(serializer.data, status=status.HTTP_201_CREATED)
   
+  
   def update(self, request, pk=None):
     """Update a recipe object
     
@@ -105,6 +109,7 @@ class Recipes(ViewSet):
     
     return Response({}, status=status.HTTP_204_NO_CONTENT)
   
+  
   def destroy(self, request, pk=None):
     """Delete a recipe object
     
@@ -121,6 +126,7 @@ class Recipes(ViewSet):
       return Response({"message": ex.args[0]}, status=status.HTTP_404_NOT_FOUND)
     except Exception as ex:
       return Response({"message": ex.args[0]}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+  
   
   @action(methods=["post", "delete"], detail=True, url_path="ingredient")
   def ingredients(self, request, pk=None):
@@ -158,6 +164,7 @@ class Recipes(ViewSet):
       return Response({}, status=status.HTTP_204_NO_CONTENT)
     
     return Response({}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
+  
   
   @action(methods=["delete"], detail=True, url_path="remove-ingredients")
   def remove_ingredients(self, request, pk=None):

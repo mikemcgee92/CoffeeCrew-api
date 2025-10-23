@@ -1,5 +1,4 @@
 Django==4.2.23
-django-cors-headers==4.7.0
 djangorestframework==3.16.1
 whitenoise==6.11.0
 squareup==43.0.2.20250820

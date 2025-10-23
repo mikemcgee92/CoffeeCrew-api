@@ -9,28 +9,30 @@
         "runtime": "python3.9",
         "buildCommand": "chmod +x vercel_build.sh && ./vercel_build.sh"
       }
-    },
-    {
-      "src": "staticfiles/**",
-      "use": "@vercel/static"
     }
   ],
-  "routes": [
+  "headers": [
     {
-      "src": "/static/(.*)",
-      "dest": "/staticfiles/$1"
+      "source": "/api/(.*)",
+      "headers": [
+        { "key": "Access-Control-Allow-Origin", "value": "*" },
+        { "key": "Access-Control-Allow-Methods", "value": "GET, POST, PUT, PATCH, DELETE, OPTIONS" },
+        { "key": "Access-Control-Allow-Headers", "value": "Accept, Content-Type, Authorization" }
+      ]
     },
     {
-      "src": "/admin/(.*)",
-      "dest": "vercel_app.py"
-    },
+      "source": "/(.*)",
+      "headers": [
+        { "key": "Access-Control-Allow-Origin", "value": "*" },
+        { "key": "Access-Control-Allow-Methods", "value": "GET, POST, PUT, PATCH, DELETE, OPTIONS" },
+        { "key": "Access-Control-Allow-Headers", "value": "Accept, Content-Type, Authorization" }
+      ]
+    }
+  ],
+  "rewrites": [
     {
-      "src": "/api/(.*)",
-      "dest": "vercel_app.py"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "vercel_app.py"
+      "source": "/(.*)",
+      "destination": "/vercel_app.py"
     }
   ]
 }
