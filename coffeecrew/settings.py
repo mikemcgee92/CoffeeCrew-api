@@ -33,7 +33,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
     'coffeecrewapi',
-    'whitenoise.runserver_nostatic'
+    'whitenoise.runserver_nostatic',
+    'corsheaders'
 ]
 
 REST_FRAMEWORK = {
