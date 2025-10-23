@@ -69,23 +69,7 @@ INSTALLED_APPS = [
     'whitenoise.runserver_nostatic'
 ]
 
-MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleWare',
-    'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
-]
-
-CORS_ALLOWED_ORIGINS = [
-    "https://coffeecrew.netlify.app",
-    "http://localhost:3000",
-]
+# This section is removed as it's defined below
 
 ROOT_URLCONF = 'coffeecrew.urls'
 
@@ -179,8 +163,33 @@ REST_FRAMEWORK = {
     'UNAUTHENTICATED_USER': None,
 }
 
-# Custom middleware configuration
+# CORS Settings
+CORS_ALLOW_ALL_ORIGINS = True  # Since this is an API, we can allow all origins
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_METHODS = [
+    'DELETE',
+    'GET',
+    'OPTIONS',
+    'PATCH',
+    'POST',
+    'PUT',
+]
+CORS_ALLOW_HEADERS = [
+    'accept',
+    'accept-encoding',
+    'authorization',
+    'content-type',
+    'dnt',
+    'origin',
+    'user-agent',
+    'x-csrftoken',
+    'x-requested-with',
+]
+CORS_PREFLIGHT_MAX_AGE = 86400  # 24 hours
+
+# Middleware configuration
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',  # CORS middleware must be at the top
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
