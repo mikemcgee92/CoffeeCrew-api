@@ -163,33 +163,8 @@ REST_FRAMEWORK = {
     'UNAUTHENTICATED_USER': None,
 }
 
-# CORS Settings
-CORS_ALLOW_ALL_ORIGINS = True  # Since this is an API, we can allow all origins
-CORS_ALLOW_CREDENTIALS = True
-CORS_ALLOW_METHODS = [
-    'DELETE',
-    'GET',
-    'OPTIONS',
-    'PATCH',
-    'POST',
-    'PUT',
-]
-CORS_ALLOW_HEADERS = [
-    'accept',
-    'accept-encoding',
-    'authorization',
-    'content-type',
-    'dnt',
-    'origin',
-    'user-agent',
-    'x-csrftoken',
-    'x-requested-with',
-]
-CORS_PREFLIGHT_MAX_AGE = 86400  # 24 hours
-
 # Middleware configuration
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',  # CORS middleware must be at the top
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
