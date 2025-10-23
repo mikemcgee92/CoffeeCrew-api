@@ -86,16 +86,6 @@ CORS_ALLOWED_ORIGINS = [
     "https://coffeecrew.netlify.app",
     "http://localhost:3000",
 ]
-CORS_ALLOW_CREDENTIALS = True
-CORS_ALLOW_METHODS = [
-    'DELETE',
-    'GET',
-    'OPTIONS',
-    'PATCH',
-    'POST',
-    'PUT',
-]
-CORS_ALLOW_HEADERS = ['*']
 
 ROOT_URLCONF = 'coffeecrew.urls'
 
