@@ -52,7 +52,7 @@ LOGGING = {
     },
 }
 
-ALLOWED_HOSTS = ['.vercel.app', '.now.sh', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['.vercel.app', '.now.sh', 'localhost', '127.0.0.1', 'coffeecrew.netlify.app']
 
 # Application definition
 INSTALLED_APPS = [
