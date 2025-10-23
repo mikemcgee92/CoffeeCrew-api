@@ -69,7 +69,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
-    'coffeecrewapi.cors_middleware.CorsMiddleware',  # Our custom CORS middleware
 ]
 
 ROOT_URLCONF = 'coffeecrew.urls'
