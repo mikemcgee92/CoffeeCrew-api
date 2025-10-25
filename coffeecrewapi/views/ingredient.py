@@ -3,6 +3,7 @@ from rest_framework import serializers, status
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.viewsets import ViewSet
+from django.db.models.functions import Lower
 
 
 class IngredientSerializer(serializers.ModelSerializer):
@@ -23,7 +24,7 @@ class Ingredients(ViewSet):
   def list(self, request):
     """Returns a list of all ingredient objects following a successful GET request to /ingredients"""
     
-    ingredients = Ingredient.objects.all()
+    ingredients = Ingredient.objects.order_by(Lower('label'))
     
     serializer = IngredientSerializer(
       ingredients, many=True, context={"request": request}
