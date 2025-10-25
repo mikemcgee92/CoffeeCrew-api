@@ -1,4 +1,5 @@
 from datetime import datetime
+from django.db.models.functions import Lower
 from coffeecrewapi.models import Recipe, Category, Ingredient, IngredientAmount
 from .ingredient_amount import IngredientAmountSerializer
 from rest_framework import serializers, status
@@ -36,7 +37,7 @@ class Recipes(ViewSet):
   def list(self, request):
     """Returns a list of all recipe objects following a successful GET request to /recipes"""
     
-    recipes = Recipe.objects.all()
+    recipes = Recipe.objects.order_by(Lower('label'))
     
     # support filtering by category and creator id
     category_id = self.request.query_params.get("category_id", None)
